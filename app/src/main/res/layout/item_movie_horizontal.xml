@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_launcher_background"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeMaxTextSize="25sp"
+            android:lines="1"
+            android:text="Сопротивление (2020)" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/english_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@id/title"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="15sp"
+            android:autoSizeMaxTextSize="20sp"
+            android:gravity="center|left"
+            android:lines="1"
+            android:text="Resistance (2020)" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/genres"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="15sp"
+            android:autoSizeMaxTextSize="20sp"
+            android:lines="1"
+            android:text="драма, история, военный" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="30sp"
+                android:autoSizeMinTextSize="20sp"
+                android:autoSizeMaxTextSize="35sp"
+                android:gravity="bottom"
+                android:textStyle="bold"
+                android:text="6,6"
+                android:layout_marginRight="5dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/number_of_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:textSize="20sp"
+                android:autoSizeMinTextSize="15sp"
+                android:autoSizeMaxTextSize="25sp"
+                android:text="120"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:id="@+id/icon_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_time"
+                android:layout_toRightOf="@id/number_of_rating"
+                android:layout_marginRight="5dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:autoSizeMinTextSize="15sp"
+                android:autoSizeMaxTextSize="25sp"
+                android:gravity="bottom"
+                android:text="2h 1m" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

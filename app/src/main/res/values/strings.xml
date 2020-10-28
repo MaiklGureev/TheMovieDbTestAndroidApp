@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MovieDB</string>
+    <string name="films">Фильмы</string>
+    <string name="favorites">Избранное</string>
+    <string name="account">Профиль</string>
+    <string name="text_for_search">Найдём любой фильм на ваш вкус</string>
+</resources>
