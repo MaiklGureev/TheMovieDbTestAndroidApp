@@ -8,19 +8,20 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.NewSessionIdRequest;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.AccountResponse;
+import ru.gureev.MovieDbTestAndroidApp.AppConfig;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.enities.Movie;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.AddFavoriteMovieRequest;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.AddFavoriteMovieResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.DeleteSessionRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.NewSessionIdRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.NewSessionRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.AccountResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.AddFavoriteMovieResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.DeleteSessionResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.GenresResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.MoviesResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.NewSessionRequest;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.NewSessionResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.NewTokenResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.SessionIdResponse;
-import ru.gureev.MovieDbTestAndroidApp.StaticVariables;
 
 public interface JSONPlaceHolderApi {
 
@@ -42,6 +43,7 @@ public interface JSONPlaceHolderApi {
     @GET("search/movie")
     Call<MoviesResponse> searchMovies(@Query("api_key") String api_key,
                                       @Query("query") String query,
+                                      @Query("language") String language,
                                       @Query("include_adult") boolean include_adult,
                                       @Query("page") int page);
 
@@ -59,8 +61,13 @@ public interface JSONPlaceHolderApi {
             @Query("api_key") String api_key,
             @Query("language") String language);
 
+    @GET("movie/{movie_id}")
+    Call<Movie> getOneMovie(
+            @Path("movie_id") int movie_id,
+            @Query("api_key") String api_key,
+            @Query("language") String language);
 
-    @Headers(StaticVariables.CONTENT_TYPE)
+    @Headers(AppConfig.CONTENT_TYPE)
     @POST("account/{account_id}/favorite")
     Call<AddFavoriteMovieResponse> setFavoritesMovie(
             @Path("account_id") int account_id,

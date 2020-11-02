@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">MovieDB</string>
     <string name="films">Фильмы</string>
+    <string name="ShowMovieDetails">Фильмы</string>
     <string name="favorites">Избранное</string>
     <string name="account">Профиль</string>
     <string name="text_for_search">Найдём любой фильм на ваш вкус</string>
+    <string name="search_item">Поиск</string>
+    <string name="switch_type_adapter_item">Переключить</string>
+    <string name="text_nothing_found">По вашему запросу ничего не найдено :(</string>
+    <string name="exit">Выйти</string>
+    <string name="back_item">Назад</string>
+    <string name="switch_favorite_movie_item">Переключить избранный фильм</string>
+    <string name="hint_text_search_view">Поиск фильмов</string>
 </resources>

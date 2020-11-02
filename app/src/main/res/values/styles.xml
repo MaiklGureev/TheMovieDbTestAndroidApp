@@ -1,40 +1,52 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="Theme.MyApp" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.MyApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Original AppCompat attributes. -->
         <item name="colorPrimary">@color/design_default_color_primary</item>
         <item name="colorSecondary">@color/design_default_color_secondary</item>
         <item name="android:colorBackground">@color/design_default_color_background</item>
         <item name="colorError">@color/design_default_color_error</item>
 
-        <!-- New MaterialComponents attributes. -->
-        <item name="colorPrimaryVariant">@color/design_default_color_primary_variant</item>
-        <item name="colorSecondaryVariant">@color/design_default_color_secondary_variant</item>
-        <item name="colorSurface">@color/design_default_color_surface</item>
-        <item name="colorOnPrimary">@color/design_default_color_on_primary</item>
-        <item name="colorOnSecondary">@color/design_default_color_on_secondary</item>
-        <item name="colorOnBackground">@color/design_default_color_on_background</item>
-        <item name="colorOnError">@color/design_default_color_on_error</item>
-        <item name="colorOnSurface">@color/design_default_color_on_surface</item>
-        <item name="scrimBackground">@color/mtrl_scrim_color</item>
-        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>
-        <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
+<!--        &lt;!&ndash; New MaterialComponents attributes. &ndash;&gt;-->
+<!--        <item name="colorPrimaryVariant">@color/design_default_color_primary_variant</item>-->
+<!--        <item name="colorSecondaryVariant">@color/design_default_color_secondary_variant</item>-->
+<!--        <item name="colorSurface">@color/design_default_color_surface</item>-->
+<!--        <item name="colorOnPrimary">@color/design_default_color_on_primary</item>-->
+<!--        <item name="colorOnSecondary">@color/design_default_color_on_secondary</item>-->
+<!--        <item name="colorOnBackground">@color/design_default_color_on_background</item>-->
+<!--        <item name="colorOnError">@color/design_default_color_on_error</item>-->
+<!--        <item name="colorOnSurface">@color/design_default_color_on_surface</item>-->
+<!--        <item name="scrimBackground">@color/mtrl_scrim_color</item>-->
+<!--        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>-->
+<!--        <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>-->
+<!--        <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>-->
+<!--        <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>-->
+<!--        <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>-->
+<!--        <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>-->
+<!--        <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>-->
+<!--        <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>-->
+<!--        <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>-->
+<!--        <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>-->
+<!--        <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>-->
+<!--        <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>-->
+<!--        <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>-->
 
     </style>
 
     <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="">
         <item name="cornerSize">10%</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:background">@color/design_default_color_primary</item>
+    </style>
+
 </resources>

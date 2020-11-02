@@ -2,18 +2,58 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/exit_button">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/user_photo_shapeable_image_view"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="20dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_launcher_background"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="25sp"
+            android:lines="1"
+            android:text=""
+            android:textStyle="bold" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/user_name_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="20sp"
+            android:lines="1"
+            android:text=""
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/exit_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/exit"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="15sp"
+        android:autoSizeMaxTextSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,19 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_films">
+    app:startDestination="@+id/navigation_movies">
 
     <fragment
         android:id="@+id/navigation_movies"
         android:name="ru.gureev.MovieDbTestAndroidApp.ui.movies.MoviesFragment"
         android:label="@string/films"
-        tools:layout="@layout/fragment_movies" />
+        tools:layout="@layout/fragment_movies">
+        <action
+            android:id="@+id/action_navigation_movies_to_show_movie_details_fragment"
+            app:destination="@id/navigation_show_movie_details_fragment"
+            app:popUpTo="@+id/navigation_movies" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_show_movie_details_fragment"
+        android:name="ru.gureev.MovieDbTestAndroidApp.ui.show_movie_details.ShowMovieDetailsFragment"
+        android:label="@string/ShowMovieDetails"
+        tools:layout="@layout/show_movie_details_fragment" />
+
 
     <fragment
         android:id="@+id/navigation_favorites"
         android:name="ru.gureev.MovieDbTestAndroidApp.ui.favorites.FavoritesFragment"
         android:label="@string/favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_navigation_movies_to_show_movie_details_fragment"
+            app:destination="@id/navigation_show_movie_details_fragment"
+            app:popUpTo="@+id/navigation_favorites" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_account"

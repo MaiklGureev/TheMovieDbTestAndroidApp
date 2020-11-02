@@ -6,10 +6,11 @@
     android:orientation="horizontal">
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/shapeable_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:padding="5dp"
+        android:layout_margin="5dp"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/ic_launcher_background"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"/>
@@ -25,12 +26,13 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:gravity="center|left"
             android:autoSizeTextType="uniform"
             android:autoSizeMinTextSize="20sp"
             android:autoSizeMaxTextSize="25sp"
             android:lines="1"
+            android:textStyle="bold"
             android:text="Сопротивление (2020)" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -38,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_below="@id/title"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:autoSizeTextType="uniform"
             android:autoSizeMinTextSize="15sp"
             android:autoSizeMaxTextSize="20sp"
@@ -50,7 +52,7 @@
             android:id="@+id/genres"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:gravity="center|left"
             android:autoSizeTextType="uniform"
             android:autoSizeMinTextSize="15sp"
@@ -61,7 +63,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:orientation="horizontal">
 
             <com.google.android.material.textview.MaterialTextView

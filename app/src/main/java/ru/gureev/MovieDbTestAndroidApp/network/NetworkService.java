@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.gureev.MovieDbTestAndroidApp.StaticVariables;
+import ru.gureev.MovieDbTestAndroidApp.AppConfig;
 import rx.schedulers.Schedulers;
 
 
@@ -14,7 +14,7 @@ public class NetworkService {
 
 
 
-    public static volatile NetworkService instance;
+    private static volatile NetworkService instance;
     private Retrofit retrofit;
 
     private NetworkService() {
@@ -22,7 +22,7 @@ public class NetworkService {
         Gson gson = new GsonBuilder().create();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(StaticVariables.API_BASE_URL)
+                .baseUrl(AppConfig.API_BASE_URL)
                 .addCallAdapterFactory(rxAdapter)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();

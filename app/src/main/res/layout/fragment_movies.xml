@@ -3,9 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
     android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+    </androidx.appcompat.widget.Toolbar>
+
+
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/welcome_to_app_text_view"
@@ -15,15 +26,32 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="60dp"
         android:layout_marginBottom="20dp"
-        android:autoSizeTextType="uniform"
         android:gravity="center|left"
+        android:autoSizeTextType="uniform"
+
         android:lines="3"
         android:text="@string/text_for_search"
         android:textStyle="bold"
+        android:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/nothing_found_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="40sp"
+        android:lines="3"
+        android:text="@string/text_nothing_found"
+        android:textStyle="bold"
         android:visibility="gone" />
 
-    <SearchView
-        android:id="@+id/search_view"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/welcome_to_app_search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -31,15 +59,21 @@
         android:layout_marginRight="60dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:visibility="gone" />
+        android:focusable="false"
+        app:iconifiedByDefault="false"
+        app:queryHint="@string/hint_text_search_view"
+        android:visibility="visible" />
 
-    <RelativeLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/relative_layout_movies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
+
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+
+
 </LinearLayout>
