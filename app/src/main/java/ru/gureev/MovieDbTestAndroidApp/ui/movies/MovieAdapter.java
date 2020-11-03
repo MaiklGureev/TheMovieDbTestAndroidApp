@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavOptions;
@@ -130,7 +129,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         private final MaterialTextView genres;
         private final MaterialTextView rating;
         private final MaterialTextView numberRating;
-        private final MaterialTextView time;
+
 
         private View.OnClickListener clickListener;
 
@@ -142,11 +141,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             genres = itemView.findViewById(R.id.genres);
             rating = itemView.findViewById(R.id.rating);
             numberRating = itemView.findViewById(R.id.number_of_rating);
-            time = itemView.findViewById(R.id.time);
+
         }
 
         private void bind(@NonNull final Movie movie) {
+
             movieId = movie.getId();
+
             clickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -161,6 +162,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                     Navigation.findNavController(v).navigate(R.id.navigation_show_movie_details_fragment, bundle, navOptions);
                 }
             };
+
             itemView.setOnClickListener(clickListener);
             Utils.loadPicture(image, AppConfig.API_IMAGE_URL + movie.getPoster_path());
             title.setText(movie.getTitle());
@@ -168,7 +170,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             genres.setText(Utils.genresToString(movie));
             rating.setText(String.valueOf(movie.getVote_average()));
             numberRating.setText(String.valueOf(movie.getVote_count()));
-            time.setText(movie.getRuntime() + " мин");
+
         }
 
 

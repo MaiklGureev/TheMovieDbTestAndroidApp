@@ -3,6 +3,7 @@ package ru.gureev.MovieDbTestAndroidApp.POJOs.enities;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Movie {
@@ -47,6 +48,10 @@ public class Movie {
     @SerializedName("release_date")
     @Expose
     private String release_date;
+
+    @SerializedName("genre_ids")
+    @Expose
+    private int[] genre_ids;
 
     public Movie() {
     }
@@ -131,6 +136,14 @@ public class Movie {
         this.vote_average = vote_average;
     }
 
+    public int[] getGenre_ids() {
+        return genre_ids;
+    }
+
+    public void setGenre_ids(int[] genre_ids) {
+        this.genre_ids = genre_ids;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -143,7 +156,8 @@ public class Movie {
                 ", vote_count=" + vote_count +
                 ", vote_average=" + vote_average +
                 ", runtime=" + runtime +
-                ", release_date=" + release_date +
+                ", release_date='" + release_date + '\'' +
+                ", genre_ids=" + Arrays.toString(genre_ids) +
                 '}';
     }
 }

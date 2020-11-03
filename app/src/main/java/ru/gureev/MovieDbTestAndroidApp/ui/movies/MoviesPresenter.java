@@ -2,11 +2,10 @@ package ru.gureev.MovieDbTestAndroidApp.ui.movies;
 
 import android.util.Log;
 
-import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,16 +32,18 @@ public class MoviesPresenter extends ViewModel implements MoviesContract.Present
     private int currentPage = 1;
     private String currentQuery = "";
     private TypeAdapter currentTypeAdapter = TypeAdapter.LINER;
+    private String TAG = "MoviesPresenter";
 
 
     Callback<MoviesResponse> moviesResponseCallback = new Callback<MoviesResponse>() {
         @Override
         public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
             boolean listIsEmpty;
-            if(response.body()!=null){
+
+            if (response.body() != null) {
                 listIsEmpty = response.body().getResults().isEmpty();
-                Log.d("NetworkService", "onResponse: " + response.body().toString());
-            }else{
+                Log.d(TAG, "onResponse: " + response.body().toString());
+            } else {
                 return;
             }
 
@@ -51,14 +52,14 @@ public class MoviesPresenter extends ViewModel implements MoviesContract.Present
                 totalPages = response.body().getTotal_pages();
                 view.showTextViewNothingFound(false);
                 view.showRecyclerView(true);
-                loadFullInfo();
+                setGenresToFilms();
             } else if (isNextPage) {
                 List<Movie> temp = movieLiveData.getValue();
                 temp.addAll(response.body().getResults());
                 movieLiveData.setValue(temp);
                 view.showTextViewNothingFound(false);
                 view.showRecyclerView(true);
-                loadFullInfo();
+                setGenresToFilms();
             } else if (listIsEmpty) {
                 if (view != null) {
                     view.showTextViewNothingFound(true);
@@ -69,9 +70,13 @@ public class MoviesPresenter extends ViewModel implements MoviesContract.Present
 
         @Override
         public void onFailure(Call<MoviesResponse> call, Throwable t) {
-            Log.d("NetworkService", "onFailure: " + call.toString());
+            Log.d(TAG, "onFailure: " + call.toString());
         }
     };
+
+    public MoviesPresenter() {
+        loadGenres();
+    }
 
     @Override
     public void setView(MoviesContract.View view) {
@@ -90,15 +95,24 @@ public class MoviesPresenter extends ViewModel implements MoviesContract.Present
 
     @Override
     public void loadMovies(String query, int page) {
+
         currentPage = page;
         currentQuery = query;
         isNextPage = page == 1 ? false : true;
+
         if (page < totalPages || page == 1) {
             NetworkService.getInstance()
                     .getJsonPlaceHolderApi()
                     .searchMovies(AppConfig.API_KEY, currentQuery, AppConfig.LANG_RU, true, currentPage)
                     .enqueue(moviesResponseCallback);
         }
+
+        movieLiveData.observe((LifecycleOwner) view, new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+                //setGenresToFilms();
+            }
+        });
     }
 
     @Override
@@ -116,17 +130,18 @@ public class MoviesPresenter extends ViewModel implements MoviesContract.Present
         return currentTypeAdapter;
     }
 
-    private void loadGenres(){
+    private void loadGenres() {
 
         Callback<GenresResponse> genresResponseCallback = new Callback<GenresResponse>() {
             @Override
             public void onResponse(Call<GenresResponse> call, Response<GenresResponse> response) {
-                Log.d("NetworkService", "onResponse: " + response.body().toString());
+                Log.d(TAG, "onResponse: " + response.body().toString());
+                genreLiveData.postValue(response.body().getGenres());
             }
 
             @Override
             public void onFailure(Call<GenresResponse> call, Throwable t) {
-                Log.d("NetworkService", "onFailure: " + call.toString());
+                Log.d(TAG, "onFailure: " + call.toString());
 
             }
         };
@@ -137,41 +152,24 @@ public class MoviesPresenter extends ViewModel implements MoviesContract.Present
                 .enqueue(genresResponseCallback);
     }
 
+    void setGenresToFilms() {
 
-    private void loadFullInfo() {
-        Callback<Movie> movieResponseCallback = new Callback<Movie>() {
-            @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-                Log.d("NetworkService", "onResponse: " + response.body().toString());
-                int index = 0;
-                List<Movie> tempList = movieLiveData.getValue();
-                for (Movie movie : tempList) {
-                    if (movie.getId() == response.body().getId()) {
-                        index = movieLiveData.getValue().indexOf(movie);
-                        break;
+        List<Genre> genreList = genreLiveData.getValue();
+        List<Movie> movieList = movieLiveData.getValue();
+
+        if (genreList != null && movieList != null) {
+
+            for (Movie m : movieList) {
+                m.setGenres(new ArrayList<Genre>());
+                for (int id : m.getGenre_ids()) {
+                    for (Genre gFull : genreList) {
+                        if (id == gFull.getId()) {
+                           m.getGenres().add(new Genre(id,gFull.getName()));
+                        }
                     }
                 }
-
-                Movie movie = tempList.get(index);
-                if (movie.getId() == response.body().getId()) {
-                    tempList.get(index).setRuntime(response.body().getRuntime());
-                    tempList.get(index).setGenres(response.body().getGenres());
-                    movieLiveData.setValue(tempList);
-                }
-
             }
-
-            @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
-                Log.d("NetworkService", "onFailure: " + call.toString());
-            }
-        };
-
-        for (Movie movie : movieLiveData.getValue()) {
-            NetworkService.getInstance()
-                    .getJsonPlaceHolderApi()
-                    .getOneMovie(movie.getId(), AppConfig.API_KEY, AppConfig.LANG_RU)
-                    .enqueue(movieResponseCallback);
+            movieLiveData.setValue(movieList);
         }
     }
 

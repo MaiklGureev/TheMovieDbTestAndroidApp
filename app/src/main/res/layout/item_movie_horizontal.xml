@@ -89,25 +89,7 @@
                 android:text="120"
                 android:layout_marginRight="5dp"/>
 
-            <ImageView
-                android:id="@+id/icon_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_time"
-                android:layout_toRightOf="@id/number_of_rating"
-                android:layout_marginRight="5dp"/>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:autoSizeMinTextSize="15sp"
-                android:autoSizeMaxTextSize="25sp"
-                android:gravity="bottom"
-                android:text="2h 1m" />
         </LinearLayout>
 
     </LinearLayout>
