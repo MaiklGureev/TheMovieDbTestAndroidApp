@@ -13,20 +13,18 @@ import rx.schedulers.Schedulers;
 public class NetworkService {
 
 
-
     private static volatile NetworkService instance;
-    private Retrofit retrofit;
+    private Retrofit retrofitV3;
 
     private NetworkService() {
         RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
         Gson gson = new GsonBuilder().create();
 
-        retrofit = new Retrofit.Builder()
+        retrofitV3 = new Retrofit.Builder()
                 .baseUrl(AppConfig.API_BASE_URL)
                 .addCallAdapterFactory(rxAdapter)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-
     }
 
     public static NetworkService getInstance() {
@@ -43,7 +41,7 @@ public class NetworkService {
     }
 
     public JSONPlaceHolderApi getJsonPlaceHolderApi() {
-        return retrofit.create(JSONPlaceHolderApi.class);
+        return retrofitV3.create(JSONPlaceHolderApi.class);
     }
 
 

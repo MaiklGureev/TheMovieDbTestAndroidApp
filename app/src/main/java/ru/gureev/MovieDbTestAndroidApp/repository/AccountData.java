@@ -2,7 +2,6 @@ package ru.gureev.MovieDbTestAndroidApp.repository;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
@@ -12,107 +11,85 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import ru.gureev.MovieDbTestAndroidApp.AppConfig;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.AccountResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.DeleteSessionRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.DeleteSessionResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewSessionIdRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewSessionRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewSessionResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewTokenResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.SessionIdResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.enities.Movie;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.AddFavoriteMovieRequest;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.DeleteSessionRequest;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.NewSessionIdRequest;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.NewSessionRequest;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.AccountResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.AddFavoriteMovieResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.DeleteSessionResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.MoviesResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.NewSessionResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.NewTokenResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.SessionIdResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.movie.AddFavoriteMovieRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.movie.AddFavoriteMovieResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.movie.MoviesResponse;
 import ru.gureev.MovieDbTestAndroidApp.network.NetworkService;
 
 public class AccountData {
 
     private static final String TAG = "AccountData";
-    private String login = "MikhailGureev";
-    private String password = "0000";
+
+    private String login;
+    private String password;
 
     private String request_token;
     private String session_id;
     private AccountResponse account;
-    private MutableLiveData<AccountResponse> accountResponseMutableLiveData = new MutableLiveData<>();
 
-    private MutableLiveData<List<Movie>> favoriteMoviesMutableLiveData = new MutableLiveData<>();
-
-
-    Callback<NewTokenResponse> newTokenResponseCallback = new Callback<NewTokenResponse>() {
-        @Override
-        public void onResponse(Call<NewTokenResponse> call, Response<NewTokenResponse> response) {
-            Log.d("NetworkService", "onResponse: " + response.body().toString());
-            request_token = response.body().getRequest_token();
-            loadSession(login, password, request_token);
-        }
-
-        @Override
-        public void onFailure(Call<NewTokenResponse> call, Throwable t) {
-            Log.d("NetworkService", "onFailure: " + call.toString());
-        }
-    };
-
-    Callback<SessionIdResponse> sessionIdResponseCallback = new Callback<SessionIdResponse>() {
-        @Override
-        public void onResponse(Call<SessionIdResponse> call, Response<SessionIdResponse> response) {
-            Log.d("NetworkService", "onResponse: " + response.body().toString());
-            session_id = (response.body().getSession_id());
-            loadAccountData(session_id);
-        }
-
-        @Override
-        public void onFailure(Call<SessionIdResponse> call, Throwable t) {
-            Log.d("NetworkService", "onFailure: " + call.toString());
-        }
-    };
-
-    Callback<AccountResponse> accountResponseCallback = new Callback<AccountResponse>() {
-        @Override
-        public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
-            Log.d("NetworkService", "onResponse: " + response.body().toString());
-            account = response.body();
-            accountResponseMutableLiveData.postValue (account);
-            reloadFavoriteMovies();
-        }
-
-        @Override
-        public void onFailure(Call<AccountResponse> call, Throwable t) {
-            Log.d("NetworkService", "onFailure: " + call.toString());
-        }
-    };
-
+    private MutableLiveData<Integer> statusCode = new MutableLiveData<>();
     Callback<NewSessionResponse> newSessionResponseCallback = new Callback<NewSessionResponse>() {
         @Override
         public void onResponse(Call<NewSessionResponse> call, Response<NewSessionResponse> response) {
-            Log.d("NetworkService", "onResponse: " + response.body().toString());
-            request_token = response.body().getRequest_token();
-            loadSessionId(request_token);
+            if (response.body() != null) {
+                Log.d(TAG, "onResponse: !null" + response.body().toString());
+                request_token = response.body().getRequest_token();
+                loadSessionId(request_token);
+            }
+            statusCode.setValue(response.code());
         }
 
         @Override
         public void onFailure(Call<NewSessionResponse> call, Throwable t) {
-            Log.d("NetworkService", "onFailure: " + call.toString());
+            Log.d(TAG, "onFailure: " + call.toString());
+            statusCode.setValue(AppConfig.CODE_ERROR);
         }
     };
+    Callback<NewTokenResponse> newTokenResponseCallback = new Callback<NewTokenResponse>() {
+        @Override
+        public void onResponse(Call<NewTokenResponse> call, Response<NewTokenResponse> response) {
+            if (response.body() != null) {
+                Log.d(TAG, "onResponse: " + response.body().toString());
+                request_token = response.body().getRequest_token();
+                loadSession(login, password, request_token);
+            }
+        }
 
+        @Override
+        public void onFailure(Call<NewTokenResponse> call, Throwable t) {
+            Log.d(TAG, "onFailure: " + call.toString());
+            statusCode.setValue(AppConfig.CODE_ERROR);
+        }
+    };
     Callback<DeleteSessionResponse> deleteSessionResponseCallback = new Callback<DeleteSessionResponse>() {
         @Override
         public void onResponse(Call<DeleteSessionResponse> call, Response<DeleteSessionResponse> response) {
-            Log.d("NetworkService", "onResponse: " + response.body().toString());
+            if (response.body() != null) {
+                Log.d(TAG, "onResponse: " + response.body().toString());
+            }
         }
 
         @Override
         public void onFailure(Call<DeleteSessionResponse> call, Throwable t) {
-            Log.d("NetworkService", "onFailure: " + call.toString());
+            Log.d(TAG, "onFailure: " + call.toString());
+            statusCode.setValue(AppConfig.CODE_ERROR);
         }
     };
-
+    private MutableLiveData<AccountResponse> accountResponseMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Movie>> favoriteMoviesMutableLiveData = new MutableLiveData<>();
     Callback<MoviesResponse> moviesResponseCallback = new Callback<MoviesResponse>() {
         @Override
         public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-            Log.d("NetworkService", "onResponse: " + response.body().toString());
+            Log.d(TAG, "onResponse: " + response.body().toString());
             if (response.body() != null) {
                 int currentPage = response.body().getPage();
                 int totalPages = response.body().getTotal_pages();
@@ -125,33 +102,74 @@ public class AccountData {
                     currentPage++;
                     loadFavoriteMovies(currentPage);
                 }
+
             }
         }
 
         @Override
         public void onFailure(Call<MoviesResponse> call, Throwable t) {
-            Log.d("NetworkService", "onFailure: " + call.toString());
+            Log.d(TAG, "onFailure: " + call.toString());
+            statusCode.setValue(AppConfig.CODE_ERROR);
         }
     };
+    Callback<AccountResponse> accountResponseCallback = new Callback<AccountResponse>() {
+        @Override
+        public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
+            Log.d(TAG, "onResponse: " + response.body().toString());
+            if (response.body() != null) {
+                account = response.body();
+                accountResponseMutableLiveData.postValue(account);
+                reloadFavoriteMovies();
+            }
+        }
 
+        @Override
+        public void onFailure(Call<AccountResponse> call, Throwable t) {
+            Log.d(TAG, "onFailure: " + call.toString());
+            statusCode.setValue(AppConfig.CODE_ERROR);
+        }
+    };
+    Callback<SessionIdResponse> sessionIdResponseCallback = new Callback<SessionIdResponse>() {
+        @Override
+        public void onResponse(Call<SessionIdResponse> call, Response<SessionIdResponse> response) {
+            if (response.body() != null) {
+                Log.d(TAG, "onResponse: " + response.code());
+                session_id = (response.body().getSession_id());
+                loadAccountData(session_id);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<SessionIdResponse> call, Throwable t) {
+            Log.d(TAG, "onFailure: " + call.toString());
+            statusCode.setValue(AppConfig.CODE_ERROR);
+        }
+    };
     Callback<AddFavoriteMovieResponse> addFavoriteMovieResponseCallback = new Callback<AddFavoriteMovieResponse>() {
         @Override
         public void onResponse(Call<AddFavoriteMovieResponse> call, Response<AddFavoriteMovieResponse> response) {
-            Log.d("NetworkService", "onResponse: " + response.body().toString());
-            reloadFavoriteMovies();
+            if (response.body() != null) {
+                Log.d(TAG, "onResponse: " + response.body().toString());
+                reloadFavoriteMovies();
+            }
         }
 
         @Override
         public void onFailure(Call<AddFavoriteMovieResponse> call, Throwable t) {
-            Log.d("NetworkService", "onFailure: " + call.toString());
+            Log.d(TAG, "onFailure: " + call.toString());
+            statusCode.setValue(AppConfig.CODE_ERROR);
         }
     };
 
-    public void loadToken() {
-        NetworkService.getInstance()
-                .getJsonPlaceHolderApi()
-                .getNewToken(AppConfig.API_KEY)
-                .enqueue(newTokenResponseCallback);
+    public void loadToken(String l, String p) {
+        login = l;
+        password = p;
+        if (!login.isEmpty() && !password.isEmpty()) {
+            NetworkService.getInstance()
+                    .getJsonPlaceHolderApi()
+                    .getNewToken(AppConfig.API_KEY)
+                    .enqueue(newTokenResponseCallback);
+        }
     }
 
     public void loadSessionId(String token) {
@@ -240,5 +258,9 @@ public class AccountData {
 
     public void setAccountResponseMutableLiveData(MutableLiveData<AccountResponse> accountResponseMutableLiveData) {
         this.accountResponseMutableLiveData = accountResponseMutableLiveData;
+    }
+
+    public MutableLiveData<Integer> getStatusCode() {
+        return statusCode;
     }
 }

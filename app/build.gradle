@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.2"
     defaultConfig {
         applicationId "ru.gureev.MovieDbTestAndroidtApp"
-        minSdkVersion 22
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -38,6 +38,7 @@ dependencies {
 
     def lifecycle_version = "2.2.0"
     def nav_version = "2.3.1"
+    def pinkman_version = "1.1.0"
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment:$nav_version"
@@ -63,7 +64,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "com.squareup.picasso:picasso:2.71828"
 
     implementation "android.arch.work:work-runtime:1.0.1"
+
+    implementation "com.redmadrobot:pinkman:$pinkman_version"
+    implementation "com.redmadrobot:pinkman-ui:$pinkman_version"
 }

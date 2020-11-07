@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/shapeable_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
         android:layout_margin="5dp"
+        android:layout_weight="2"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/ic_launcher_background"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"/>
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+        app:srcCompat="@drawable/ic_launcher_background" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,13 +27,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:gravity="center|left"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMinTextSize="20sp"
             android:autoSizeMaxTextSize="25sp"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center|left"
             android:lines="1"
-            android:textStyle="bold"
-            android:text="Сопротивление (2020)" />
+            android:text="Сопротивление (2020)"
+            android:textStyle="bold" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/english_title"
@@ -41,9 +41,9 @@
             android:layout_height="0dp"
             android:layout_below="@id/title"
             android:layout_weight="2"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMinTextSize="15sp"
             android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="15sp"
+            android:autoSizeTextType="uniform"
             android:gravity="center|left"
             android:lines="1"
             android:text="Resistance (2020)" />
@@ -53,10 +53,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:gravity="center|left"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMinTextSize="15sp"
             android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="15sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center|left"
             android:lines="1"
             android:text="драма, история, военный" />
 
@@ -70,24 +70,24 @@
                 android:id="@+id/rating"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="30sp"
-                android:autoSizeMinTextSize="20sp"
+                android:layout_marginRight="5dp"
                 android:autoSizeMaxTextSize="35sp"
+                android:autoSizeMinTextSize="20sp"
                 android:gravity="bottom"
-                android:textStyle="bold"
                 android:text="6,6"
-                android:layout_marginRight="5dp"/>
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/number_of_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:textSize="20sp"
-                android:autoSizeMinTextSize="15sp"
+                android:layout_marginRight="5dp"
                 android:autoSizeMaxTextSize="25sp"
+                android:autoSizeMinTextSize="15sp"
+                android:gravity="bottom"
                 android:text="120"
-                android:layout_marginRight="5dp"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>

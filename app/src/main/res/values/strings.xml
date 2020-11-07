@@ -12,4 +12,14 @@
     <string name="back_item">Назад</string>
     <string name="switch_favorite_movie_item">Переключить избранный фильм</string>
     <string name="hint_text_search_view">Поиск фильмов</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="welcome_instruction">Укажите логин и пароль, которые вы использовали для входа</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="enter">Войти</string>
+    <string name="repeat_pin_code">Повторите пин-код</string>
+    <string name="come_up_with_a_pin_code">Придумайте пин-код для быстрого входа</string>
+    <string name="something_went_wrong">Что-то пошло не так, попробуйте войти позже</string>
+    <string name="incorrect_login_and_password">Неверный логин и пароль</string>
+    <string name="incorrect_pin_code">Неверный пин-код</string>
 </resources>

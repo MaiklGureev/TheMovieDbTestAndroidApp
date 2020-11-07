@@ -7,15 +7,12 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
+        style="@style/Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Toolbar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-    </androidx.appcompat.widget.Toolbar>
-
+        app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -26,8 +23,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="60dp"
         android:layout_marginBottom="20dp"
-        android:gravity="center|left"
         android:autoSizeTextType="uniform"
+        android:gravity="center|left"
 
         android:lines="3"
         android:text="@string/text_for_search"
@@ -42,9 +39,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:autoSizeTextType="uniform"
         android:autoSizeMaxTextSize="40sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
         android:lines="3"
         android:text="@string/text_nothing_found"
         android:textStyle="bold"
@@ -58,22 +55,22 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="60dp"
         android:layout_marginBottom="20dp"
-        android:gravity="center"
         android:focusable="false"
+        android:gravity="center"
+        android:visibility="visible"
         app:iconifiedByDefault="false"
-        app:queryHint="@string/hint_text_search_view"
-        android:visibility="visible" />
+        app:queryHint="@string/hint_text_search_view" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/relative_layout_movies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginRight="20dp"-->
-<!--        android:layout_marginBottom="20dp"-->
+    <!--        android:layout_marginLeft="20dp"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_marginRight="20dp"-->
+    <!--        android:layout_marginBottom="20dp"-->
 
 
 </LinearLayout>

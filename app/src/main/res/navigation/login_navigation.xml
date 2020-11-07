@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_navigation.xml"
+    app:startDestination="@id/authenticationFragment">
+
+
+    <fragment
+        android:id="@+id/authenticationFragment"
+        android:name="ru.gureev.MovieDbTestAndroidApp.ui.login.authentication.AuthenticationFragment"
+        tools:layout="@layout/authentication_fragment">
+
+        <action
+            android:id="@+id/action_authenticationFragment_to_pinCodeFragment"
+            app:destination="@id/createPinCodeFragment"
+            app:popUpTo="@id/authenticationFragment" />
+
+        <action
+            android:id="@+id/action_authenticationFragment_to_enterPinCodeFragment2"
+            app:destination="@id/enterPinCodeFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/createPinCodeFragment"
+        android:name="ru.gureev.MovieDbTestAndroidApp.ui.login.createPinCode.CreatePinCodeFragment"
+        tools:layout="@layout/pin_code_fragment" />
+
+    <fragment
+        android:id="@+id/enterPinCodeFragment"
+        android:name="ru.gureev.MovieDbTestAndroidApp.ui.login.enterPinCode.EnterPinCodeFragment"
+        tools:layout="@layout/enter_pin_code_fragment" />
+
+</navigation>

@@ -9,19 +9,19 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import ru.gureev.MovieDbTestAndroidApp.AppConfig;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.AccountResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.DeleteSessionRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.DeleteSessionResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewSessionIdRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewSessionRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewSessionResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewTokenResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.SessionIdResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.enities.Movie;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.AddFavoriteMovieRequest;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.DeleteSessionRequest;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.NewSessionIdRequest;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.requests.NewSessionRequest;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.AccountResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.AddFavoriteMovieResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.DeleteSessionResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.GenresResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.MoviesResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.NewSessionResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.NewTokenResponse;
-import ru.gureev.MovieDbTestAndroidApp.POJOs.responses.SessionIdResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.genre.GenresResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.movie.AddFavoriteMovieRequest;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.movie.AddFavoriteMovieResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.movie.MoviesResponse;
 
 public interface JSONPlaceHolderApi {
 
@@ -78,5 +78,6 @@ public interface JSONPlaceHolderApi {
     @HTTP(method = "DELETE", path = "authentication/session", hasBody = true)
     Call<DeleteSessionResponse> deleteSession(@Query("api_key") String api_key,
                                               @Body DeleteSessionRequest deleteSessionRequest);
+
 
 }

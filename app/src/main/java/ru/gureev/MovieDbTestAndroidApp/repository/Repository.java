@@ -8,7 +8,6 @@ public class Repository {
 
     private Repository() {
         accountData = new AccountData();
-        accountData.loadToken();
     }
 
     public static Repository getInstance() {
@@ -23,7 +22,6 @@ public class Repository {
             return instance;
         }
     }
-
 
 
     public AccountData getAccountData() {

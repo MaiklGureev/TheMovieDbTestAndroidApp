@@ -37,4 +37,5 @@
 
     <!-- 32% opacity black -->
     <color name="mtrl_scrim_color">#52000000</color>
+    <color name="red_color">#FF0000</color>
 </resources>

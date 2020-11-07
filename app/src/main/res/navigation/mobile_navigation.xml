@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_movies"
-        android:name="ru.gureev.MovieDbTestAndroidApp.ui.movies.MoviesFragment"
+        android:name="ru.gureev.MovieDbTestAndroidApp.ui.main.movies.MoviesFragment"
         android:label="@string/films"
         tools:layout="@layout/fragment_movies">
         <action
@@ -18,14 +18,14 @@
 
     <fragment
         android:id="@+id/navigation_show_movie_details_fragment"
-        android:name="ru.gureev.MovieDbTestAndroidApp.ui.show_movie_details.ShowMovieDetailsFragment"
+        android:name="ru.gureev.MovieDbTestAndroidApp.ui.main.show_movie_details.ShowMovieDetailsFragment"
         android:label="@string/ShowMovieDetails"
         tools:layout="@layout/show_movie_details_fragment" />
 
 
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="ru.gureev.MovieDbTestAndroidApp.ui.favorites.FavoritesFragment"
+        android:name="ru.gureev.MovieDbTestAndroidApp.ui.main.favorites.FavoritesFragment"
         android:label="@string/favorites"
         tools:layout="@layout/fragment_favorites">
         <action
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="ru.gureev.MovieDbTestAndroidApp.ui.account.AccountFragment"
+        android:name="ru.gureev.MovieDbTestAndroidApp.ui.main.account.AccountFragment"
         android:label="@string/account"
         tools:layout="@layout/fragment_account" />
 </navigation>
