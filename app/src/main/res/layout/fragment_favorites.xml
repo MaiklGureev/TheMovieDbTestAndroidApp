@@ -14,6 +14,18 @@
         app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/favorite_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:autoSizeMaxTextSize="32sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center|left"
+        android:lines="3"
+        android:text="@string/favorites"
+        android:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/nothing_found_text_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -21,12 +33,11 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:autoSizeMaxTextSize="40sp"
+        android:autoSizeMaxTextSize="32sp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
         android:lines="3"
         android:text="@string/text_nothing_found"
-        android:textStyle="bold"
         android:visibility="gone" />
 
 

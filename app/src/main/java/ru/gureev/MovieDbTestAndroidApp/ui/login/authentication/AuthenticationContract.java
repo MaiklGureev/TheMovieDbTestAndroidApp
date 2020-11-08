@@ -5,9 +5,9 @@ import android.content.Context;
 public interface AuthenticationContract {
 
     interface View {
-        void loadNextPage();
         void showErrorMessage(int code);
         Context getContext();
+        android.view.View getView();
     }
 
     interface Presenter {

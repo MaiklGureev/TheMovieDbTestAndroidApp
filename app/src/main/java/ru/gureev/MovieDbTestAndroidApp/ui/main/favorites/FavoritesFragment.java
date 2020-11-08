@@ -40,6 +40,7 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
     private MenuItem switchTypeAdapterMenuItem;
     private SearchView searchViewInToolbar;
     private MaterialTextView nothingFoundTextView;
+    private MaterialTextView favoriteTextView;
 
     private LinearLayoutManager mLayoutManager;
     private GridLayoutManager gridLayoutManager;
@@ -54,7 +55,7 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
         Log.d(TAG, "onCreateView: ");
         favoritesPresenter =
                 ViewModelProviders.of(this).get(FavoritesPresenter.class);
-        favoritesPresenter.setView(this);
+
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
 
         return root;
@@ -67,6 +68,8 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
 
         recyclerView = view.findViewById(R.id.relative_layout_movies);
         nothingFoundTextView = view.findViewById(R.id.nothing_found_text_view);
+        favoriteTextView = view.findViewById(R.id.favorite_text_view);
+        favoritesPresenter.setView(this);
 
         currentTypeAdapter = TypeAdapter.LINER;
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -101,12 +104,28 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
 
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(movieAdapterList);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (movieAdapterGrid.getLastVisibleItem() >= 4 || movieAdapterList.getLastVisibleItem() >= 4) {
+                    favoriteTextView.setVisibility(View.GONE);
+                } else {
+                    favoriteTextView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         if (currentTypeAdapter != favoritesPresenter.getCurrentTypeAdapter()) {
             setAdapter(favoritesPresenter.getCurrentTypeAdapter());
         }
 
-        //favoritesPresenter.loadMovies();
+//        favoritesPresenter.loadMovies();
         searchViewInToolbar.setQuery(favoritesPresenter.getCurrentQuery(), true);
 
     }
@@ -222,15 +241,17 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
         }
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
-        favoritesPresenter.loadMovies();
+        favoritesPresenter.reloadMovie();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
         if (currentTypeAdapter != favoritesPresenter.getCurrentTypeAdapter()) {
             switchAdapter();
         }
@@ -239,7 +260,6 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
         searchViewInToolbar.setQuery(favoritesPresenter.getCurrentQuery(), true);
         movieAdapterList.filter(favoritesPresenter.getCurrentQuery());
         movieAdapterGrid.filter(favoritesPresenter.getCurrentQuery());
-
 
     }
 }

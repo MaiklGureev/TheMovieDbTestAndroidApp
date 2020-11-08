@@ -1,13 +1,21 @@
 package ru.gureev.MovieDbTestAndroidApp.ui.main.account;
 
+import android.content.SharedPreferences;
+
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
+
+import com.redmadrobot.pinkman.Pinkman;
+
+import java.util.ArrayList;
 
 import ru.gureev.MovieDbTestAndroidApp.AppConfig;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.AccountResponse;
 import ru.gureev.MovieDbTestAndroidApp.repository.Repository;
 import ru.gureev.MovieDbTestAndroidApp.tools.Utils;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class AccountPresenter extends ViewModel implements AccountContract.Presenter {
 
@@ -41,6 +49,13 @@ public class AccountPresenter extends ViewModel implements AccountContract.Prese
     @Override
     public void exit() {
         Repository.getInstance().getAccountData().deleteSession();
+        Pinkman pinkman = new Pinkman(view.getContext().getApplicationContext(), AppConfig.PIN_STORAGE_NAME, new ArrayList<String>());
+        pinkman.removePin();
+
+        SharedPreferences.Editor editor = view.getContext().getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE).edit();
+        editor.remove(AppConfig.APP_PREFERENCES_NAME);
+        editor.commit();
+
         System.exit(0);
     }
 }

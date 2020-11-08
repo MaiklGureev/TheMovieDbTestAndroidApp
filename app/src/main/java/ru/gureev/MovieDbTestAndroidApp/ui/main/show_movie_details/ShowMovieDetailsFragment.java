@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +34,10 @@ public class ShowMovieDetailsFragment extends Fragment implements ShowMovieDetai
     private int movieId;
     private boolean isFavoriteMovie = false;
     private ShapeableImageView image;
-    private ImageView timeIcon;
+
+    private MaterialTextView timeText;
+    private MaterialTextView ratingText;
+
     private MaterialTextView title;
     private MaterialTextView englishTitle;
     private MaterialTextView genres;
@@ -81,7 +83,9 @@ public class ShowMovieDetailsFragment extends Fragment implements ShowMovieDetai
         numberRating = view.findViewById(R.id.number_of_rating);
         time = view.findViewById(R.id.time);
         description = view.findViewById(R.id.description);
-        timeIcon = view.findViewById(R.id.icon_time);
+
+        timeText = view.findViewById(R.id.time_text_view);
+        ratingText = view.findViewById(R.id.rating_text_view);
 
         initToolbar(view);
     }
@@ -103,7 +107,8 @@ public class ShowMovieDetailsFragment extends Fragment implements ShowMovieDetai
                 numberRating.setText(String.valueOf(movie.getVote_count()));
                 time.setText(movie.getRuntime() + " мин");
                 description.setText(movie.getOverview());
-                timeIcon.setVisibility(View.VISIBLE);
+                timeText.setVisibility(View.VISIBLE);
+                ratingText.setVisibility(View.VISIBLE);
             }
         });
 

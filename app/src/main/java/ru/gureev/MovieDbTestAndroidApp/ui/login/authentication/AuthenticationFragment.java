@@ -1,6 +1,9 @@
 package ru.gureev.MovieDbTestAndroidApp.ui.login.authentication;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavOptions;
-import androidx.navigation.Navigation;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -35,7 +36,7 @@ public class AuthenticationFragment extends Fragment implements AuthenticationCo
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.authentication_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_authentication, container, false);
     }
 
 
@@ -59,15 +60,35 @@ public class AuthenticationFragment extends Fragment implements AuthenticationCo
 
             }
         });
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (loginInputEditText.length() != 0 && passwordInputEditText.length() != 0){
+                    Log.d("afterTextChanged", "afterTextChanged: true");
+                    exitMaterialButton.setRippleColorResource(R.color.selectedText);
+                    exitMaterialButton.setBackgroundResource(R.color.selectedButton);
+                }else {
+                    exitMaterialButton.setRippleColorResource(R.color.unselectedText);
+                    exitMaterialButton.setBackgroundResource(R.color.unselectedButton);
+                    Log.d("afterTextChanged", "afterTextChanged: false");
+                }
+
+            }
+        };
+        loginInputEditText.addTextChangedListener(textWatcher);
+        passwordInputEditText.addTextChangedListener(textWatcher);
     }
 
-    @Override
-    public void loadNextPage() {
-        Bundle bundle = new Bundle();
-        NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.authenticationFragment, false).build();
-        Navigation.findNavController(getView()).navigate(R.id.createPinCodeFragment, bundle, navOptions);
-    }
 
     @Override
     public void showErrorMessage(int code) {
@@ -81,4 +102,5 @@ public class AuthenticationFragment extends Fragment implements AuthenticationCo
             errorMessageTextView.setVisibility(View.VISIBLE);
         }
     }
+
 }

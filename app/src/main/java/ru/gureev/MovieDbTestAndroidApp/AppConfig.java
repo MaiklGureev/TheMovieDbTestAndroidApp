@@ -22,12 +22,21 @@ public class AppConfig {
     public static final int CODE_INVALID_DATA = 401;
     public static final int CODE_ERROR = -2;
 
-    public static final String PIN_STORAGE_NAME = "pinCode";
+    public static final String PIN_STORAGE_NAME = "PinCode";
     public static final String BEARER_TOKEN_STORAGE_NAME = "bearerToken";
+
+    public static final String APP_PREFERENCES = "SESSION";
+    public static final String APP_PREFERENCES_NAME = "sessionId";
+    public static final String RESET_DATA = "resetData";
 
     public enum PopUpFragment {
         MOVIES,
         FAVORITES
+    }
+
+    public enum PinCodeState {
+        FIRST_ATTEMPT,
+        SECOND_ATTEMPT
     }
 
 

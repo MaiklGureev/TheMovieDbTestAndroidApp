@@ -9,27 +9,23 @@
     <fragment
         android:id="@+id/authenticationFragment"
         android:name="ru.gureev.MovieDbTestAndroidApp.ui.login.authentication.AuthenticationFragment"
-        tools:layout="@layout/authentication_fragment">
+        tools:layout="@layout/fragment_authentication">
 
         <action
             android:id="@+id/action_authenticationFragment_to_pinCodeFragment"
             app:destination="@id/createPinCodeFragment"
             app:popUpTo="@id/authenticationFragment" />
 
-        <action
-            android:id="@+id/action_authenticationFragment_to_enterPinCodeFragment2"
-            app:destination="@id/enterPinCodeFragment" />
-
     </fragment>
 
     <fragment
         android:id="@+id/createPinCodeFragment"
         android:name="ru.gureev.MovieDbTestAndroidApp.ui.login.createPinCode.CreatePinCodeFragment"
-        tools:layout="@layout/pin_code_fragment" />
+        tools:layout="@layout/fragment_create_pin_code" />
 
     <fragment
         android:id="@+id/enterPinCodeFragment"
         android:name="ru.gureev.MovieDbTestAndroidApp.ui.login.enterPinCode.EnterPinCodeFragment"
-        tools:layout="@layout/enter_pin_code_fragment" />
+        tools:layout="@layout/fragment_enter_pin_code" />
 
 </navigation>

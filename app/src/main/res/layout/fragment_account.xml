@@ -15,8 +15,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/user_photo_shapeable_image_view"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:layout_margin="20dp"
             android:scaleType="fitXY"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
@@ -27,33 +27,33 @@
             android:id="@+id/name_text_view"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:autoSizeMaxTextSize="25sp"
+            android:autoSizeMaxTextSize="32sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:lines="1"
-            android:text=""
-            android:textStyle="bold" />
+            android:text="" />
 
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/user_name_text_view"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMaxTextSize="15sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:lines="1"
-            android:text=""
-            android:textStyle="bold" />
+            android:textColor="@color/unselectedText"
+            android:text="" />
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/exit_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:autoSizeMaxTextSize="20sp"
-        android:autoSizeMinTextSize="15sp"
+        android:autoSizeMaxTextSize="16sp"
         android:autoSizeTextType="uniform"
+        android:textColor="@color/strokeColor"
+        android:backgroundTint= "@color/unselectedButton"
         android:text="@string/exit"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

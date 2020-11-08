@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="150dp"
     android:orientation="horizontal">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:scaleType="fitXY"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
         app:srcCompat="@drawable/ic_launcher_background" />
@@ -27,22 +27,21 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:autoSizeMaxTextSize="25sp"
-            android:autoSizeMinTextSize="20sp"
+            android:autoSizeMaxTextSize="16sp"
             android:autoSizeTextType="uniform"
             android:gravity="center|left"
             android:lines="1"
             android:text="Сопротивление (2020)"
-            android:textStyle="bold" />
+            />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/english_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_below="@id/title"
+            android:textColor="@color/unselectedText"
             android:layout_weight="2"
-            android:autoSizeMaxTextSize="20sp"
-            android:autoSizeMinTextSize="15sp"
+            android:autoSizeMaxTextSize="14sp"
             android:autoSizeTextType="uniform"
             android:gravity="center|left"
             android:lines="1"
@@ -53,44 +52,44 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:autoSizeMaxTextSize="20sp"
-            android:autoSizeMinTextSize="15sp"
+            android:autoSizeMaxTextSize="14sp"
             android:autoSizeTextType="uniform"
             android:gravity="center|left"
             android:lines="1"
             android:text="драма, история, военный" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
-            android:orientation="horizontal">
+            >
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/rating"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:autoSizeMaxTextSize="35sp"
-                android:autoSizeMinTextSize="20sp"
+                android:autoSizeMaxTextSize="16sp"
+                android:autoSizeTextType="uniform"
                 android:gravity="bottom"
-                android:text="6,6"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:text="6.6" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/number_of_rating"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:autoSizeMaxTextSize="25sp"
-                android:autoSizeMinTextSize="15sp"
+                android:textColor="@color/unselectedText"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="14sp"
                 android:gravity="bottom"
+                android:layout_toRightOf="@id/rating"
+                android:layout_alignParentBottom="true"
                 android:text="120"
-                android:textSize="20sp" />
+                 />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

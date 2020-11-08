@@ -19,10 +19,11 @@
 
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/pin_code_message"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="30"
-        android:autoSizeMaxTextSize="30sp"
+        android:layout_weight="20"
+        android:autoSizeMaxTextSize="32sp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
         android:lines="2"
@@ -41,35 +42,44 @@
             android:id="@+id/indicator1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="1dp"
+            android:layout_margin="5dp"
             android:src="@drawable/ic_indicator_unselected_24dp" />
 
         <ImageView
             android:id="@+id/indicator2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="1dp"
+            android:layout_margin="5dp"
             android:src="@drawable/ic_indicator_unselected_24dp" />
 
         <ImageView
             android:id="@+id/indicator3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="1dp"
+            android:layout_margin="5dp"
             android:src="@drawable/ic_indicator_unselected_24dp" />
 
         <ImageView
             android:id="@+id/indicator4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="1dp"
+            android:layout_margin="5dp"
             android:src="@drawable/ic_indicator_unselected_24dp" />
 
     </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/pin_code_error_message"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeTextType="uniform"
+        android:lines="1"
+        android:text="@string/incorrect_pin_code"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_error"
+        android:visibility="invisible" />
 
     <GridLayout
         android:layout_width="match_parent"
@@ -81,10 +91,10 @@
         android:paddingLeft="30dp"
         android:paddingTop="30dp"
         android:paddingRight="30dp"
-        app:layout_constraintDimensionRatio="H,1:1"
         android:paddingBottom="30dp"
+        android:rowCount="4"
 
-        android:rowCount="4">
+        app:layout_constraintDimensionRatio="H,1:1">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_1"
@@ -166,7 +176,7 @@
             android:layout_height="48dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"
+            android:layout_gravity="center"
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:foreground="@drawable/ic_backspace_24dp"

@@ -17,15 +17,15 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/welcome_to_app_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="60dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="235dp"
+        android:layout_height="108dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="67dp"
+        android:autoSizeMaxTextSize="32sp"
         android:autoSizeTextType="uniform"
         android:gravity="center|left"
-
         android:lines="3"
         android:text="@string/text_for_search"
         android:textStyle="bold"
@@ -39,12 +39,11 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:autoSizeMaxTextSize="40sp"
+        android:autoSizeMaxTextSize="32sp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
         android:lines="3"
         android:text="@string/text_nothing_found"
-        android:textStyle="bold"
         android:visibility="gone" />
 
     <androidx.appcompat.widget.SearchView
@@ -52,25 +51,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="60dp"
         android:layout_marginBottom="20dp"
+        android:background="@color/searchViewBackground"
         android:focusable="false"
+        android:foregroundTint="@color/textColor"
         android:gravity="center"
+        android:textColor="@color/textColor"
+        android:textCursorDrawable="@color/textColor"
         android:visibility="visible"
         app:iconifiedByDefault="false"
-        app:queryHint="@string/hint_text_search_view" />
+        app:queryHint="@string/hint_text_search_view"
+        app:searchHintIcon="@drawable/ic_search_24dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/relative_layout_movies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
-
-    <!--        android:layout_marginLeft="20dp"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:layout_marginRight="20dp"-->
-    <!--        android:layout_marginBottom="20dp"-->
 
 
 </LinearLayout>

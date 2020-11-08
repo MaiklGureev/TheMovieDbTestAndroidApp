@@ -74,13 +74,10 @@ public class MoviesPresenter extends ViewModel implements MoviesContract.Present
         }
     };
 
-    public MoviesPresenter() {
-        loadGenres();
-    }
-
     @Override
     public void setView(MoviesContract.View view) {
         this.view = view;
+        loadGenres();
     }
 
     @Override

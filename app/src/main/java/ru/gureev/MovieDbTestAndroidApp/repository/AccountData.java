@@ -1,8 +1,12 @@
 package ru.gureev.MovieDbTestAndroidApp.repository;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
+
+import com.redmadrobot.pinkman.Pinkman;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +23,16 @@ import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewSessionRequest;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewSessionResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.NewTokenResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.authV3.SessionIdResponse;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.enities.Genre;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.enities.Movie;
+import ru.gureev.MovieDbTestAndroidApp.POJOs.genre.GenresResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.movie.AddFavoriteMovieRequest;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.movie.AddFavoriteMovieResponse;
 import ru.gureev.MovieDbTestAndroidApp.POJOs.movie.MoviesResponse;
 import ru.gureev.MovieDbTestAndroidApp.network.NetworkService;
+import ru.gureev.MovieDbTestAndroidApp.tools.GlobalAppContextSingleton;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class AccountData {
 
@@ -37,6 +46,8 @@ public class AccountData {
     private AccountResponse account;
 
     private MutableLiveData<Integer> statusCode = new MutableLiveData<>();
+    private MutableLiveData<List<Genre>> genreMutableLiveData = new MutableLiveData<>();
+
     Callback<NewSessionResponse> newSessionResponseCallback = new Callback<NewSessionResponse>() {
         @Override
         public void onResponse(Call<NewSessionResponse> call, Response<NewSessionResponse> response) {
@@ -86,23 +97,23 @@ public class AccountData {
     };
     private MutableLiveData<AccountResponse> accountResponseMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Movie>> favoriteMoviesMutableLiveData = new MutableLiveData<>();
+
     Callback<MoviesResponse> moviesResponseCallback = new Callback<MoviesResponse>() {
         @Override
         public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-            Log.d(TAG, "onResponse: " + response.body().toString());
             if (response.body() != null) {
+                Log.d(TAG, "onResponse: " + response.body().toString());
                 int currentPage = response.body().getPage();
                 int totalPages = response.body().getTotal_pages();
 
                 List<Movie> tempList = favoriteMoviesMutableLiveData.getValue() != null ? favoriteMoviesMutableLiveData.getValue() : new ArrayList<Movie>();
                 tempList.addAll(response.body().getResults());
-                favoriteMoviesMutableLiveData.postValue(tempList);
+                favoriteMoviesMutableLiveData.setValue(tempList);
 
                 if (currentPage + 1 <= totalPages) {
                     currentPage++;
                     loadFavoriteMovies(currentPage);
                 }
-
             }
         }
 
@@ -115,11 +126,12 @@ public class AccountData {
     Callback<AccountResponse> accountResponseCallback = new Callback<AccountResponse>() {
         @Override
         public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
-            Log.d(TAG, "onResponse: " + response.body().toString());
             if (response.body() != null) {
+                Log.d(TAG, "onResponse: " + response.body().toString());
                 account = response.body();
-                accountResponseMutableLiveData.postValue(account);
-                reloadFavoriteMovies();
+                accountResponseMutableLiveData.setValue(account);
+                loadGenres();
+
             }
         }
 
@@ -127,6 +139,7 @@ public class AccountData {
         public void onFailure(Call<AccountResponse> call, Throwable t) {
             Log.d(TAG, "onFailure: " + call.toString());
             statusCode.setValue(AppConfig.CODE_ERROR);
+            logOut();
         }
     };
     Callback<SessionIdResponse> sessionIdResponseCallback = new Callback<SessionIdResponse>() {
@@ -135,7 +148,7 @@ public class AccountData {
             if (response.body() != null) {
                 Log.d(TAG, "onResponse: " + response.code());
                 session_id = (response.body().getSession_id());
-                loadAccountData(session_id);
+                //loadAccountData(session_id);
             }
         }
 
@@ -263,4 +276,50 @@ public class AccountData {
     public MutableLiveData<Integer> getStatusCode() {
         return statusCode;
     }
+
+    public void setSession_id(String session_id) {
+        this.session_id = session_id;
+    }
+
+    public MutableLiveData<List<Genre>> getGenreMutableLiveData() {
+        return genreMutableLiveData;
+    }
+
+    void logOut(){
+        Context context = GlobalAppContextSingleton.getInstance().getApplicationContext();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE);
+        String id = sharedPreferences.getString(AppConfig.APP_PREFERENCES_NAME, "");
+        Repository.getInstance().getAccountData().setSession_id(id);
+
+        Pinkman pinkman = new Pinkman(context, AppConfig.PIN_STORAGE_NAME, new ArrayList<String>());
+        pinkman.removePin();
+
+        SharedPreferences.Editor editor = context.getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE).edit();
+        editor.remove(AppConfig.APP_PREFERENCES_NAME);
+        editor.commit();
+
+    }
+    private void loadGenres() {
+
+        Callback<GenresResponse> genresResponseCallback = new Callback<GenresResponse>() {
+            @Override
+            public void onResponse(Call<GenresResponse> call, Response<GenresResponse> response) {
+                Log.d(TAG, "onResponse: " + response.body().toString());
+                genreMutableLiveData.setValue(response.body().getGenres());
+                reloadFavoriteMovies();
+            }
+
+            @Override
+            public void onFailure(Call<GenresResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + call.toString());
+            }
+        };
+
+        NetworkService.getInstance()
+                .getJsonPlaceHolderApi()
+                .getGenres(AppConfig.API_KEY, AppConfig.LANG_RU)
+                .enqueue(genresResponseCallback);
+    }
+
+
 }

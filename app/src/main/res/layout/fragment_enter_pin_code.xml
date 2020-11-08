@@ -10,14 +10,14 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/user_photo_shapeable_image_view"
         android:layout_width="150dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_weight="20"
         android:scaleType="fitXY"
         android:visibility="visible"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -36,6 +36,7 @@
         android:layout_height="0dp"
         android:layout_weight="10"
         android:gravity="center"
+        android:foregroundGravity="center"
         android:orientation="horizontal"
         android:paddingLeft="60dp"
         android:paddingRight="60dp">
@@ -44,38 +45,34 @@
             android:id="@+id/indicator1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="1dp"
+            android:layout_margin="5dp"
             android:src="@drawable/ic_indicator_unselected_24dp" />
 
         <ImageView
             android:id="@+id/indicator2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="1dp"
+            android:layout_margin="5dp"
             android:src="@drawable/ic_indicator_unselected_24dp" />
 
         <ImageView
             android:id="@+id/indicator3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="1dp"
+            android:layout_margin="5dp"
             android:src="@drawable/ic_indicator_unselected_24dp" />
 
         <ImageView
             android:id="@+id/indicator4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="1dp"
+            android:layout_margin="5dp"
             android:src="@drawable/ic_indicator_unselected_24dp" />
 
     </LinearLayout>
 
-
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/pin_code_error_message"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
@@ -98,7 +95,9 @@
         android:paddingTop="30dp"
         android:paddingRight="30dp"
         android:paddingBottom="30dp"
-        android:rowCount="4">
+        android:rowCount="4"
+
+        app:layout_constraintDimensionRatio="H,1:1">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_1"
@@ -121,13 +120,14 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_exit"
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:textColor="@color/textColor"
             android:text="Выйти" />
 
         <com.google.android.material.button.MaterialButton
@@ -175,8 +175,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_delete"
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
@@ -184,6 +184,8 @@
             android:layout_weight="1"
             android:foreground="@drawable/ic_backspace_24dp"
             android:foregroundGravity="center" />
+
+
     </GridLayout>
 
 </LinearLayout>

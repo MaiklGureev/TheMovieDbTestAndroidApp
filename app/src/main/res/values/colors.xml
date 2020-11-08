@@ -1,41 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Light theme brand colors. -->
-    <color name="design_default_color_primary">#6200EE</color>
-    <color name="design_default_color_primary_dark">#3700B3</color>
-    <color name="design_default_color_primary_variant">#3700B3</color>
-    <color name="design_default_color_on_primary">#FFFFFF</color>
-    <color name="design_default_color_secondary">#03DAC6</color>
-    <color name="design_default_color_secondary_variant">#018786</color>
-    <color name="design_default_color_on_secondary">#000000</color>
-
-    <!-- Light theme neutral colors. -->
-    <color name="design_default_color_background">#FFFFFF</color>
-    <color name="design_default_color_on_background">#000000</color>
-    <color name="design_default_color_surface">#FFFFFF</color>
-    <color name="design_default_color_on_surface">#000000</color>
-    <color name="design_default_color_error">#B00020</color>
-    <color name="design_default_color_on_error">#FFFFFF</color>
-
-    <!-- Dark theme brand colors. -->
-    <color name="design_dark_default_color_primary">#BA86FC</color>
-    <color name="design_dark_default_color_primary_dark">#000000</color>
-    <color name="design_dark_default_color_primary_variant">#3700B3</color>
-    <color name="design_dark_default_color_on_primary">#000000</color>
-    <color name="design_dark_default_color_secondary">#03DAC6</color>
-    <color name="design_dark_default_color_secondary_variant">#03DAC6</color>
-    <color name="design_dark_default_color_on_secondary">#000000</color>
-
-    <!-- Dark theme neutral colors. -->
-    <color name="design_dark_default_color_background">#121212</color>
-    <color name="design_dark_default_color_on_background">#FFFFFF</color>
-    <color name="design_dark_default_color_surface">#121212</color>
-    <color name="design_dark_default_color_on_surface">#FFFFFF</color>
-    <color name="design_dark_default_color_error">#CF6679</color>
-    <color name="design_dark_default_color_on_error">#000000</color>
-
-    <!-- 32% opacity black -->
-    <color name="mtrl_scrim_color">#52000000</color>
     <color name="red_color">#FF0000</color>
+    <color name="colorPrimary">#FE4E27</color>
+    <color name="strokeColor">#6C63FF</color>
+    <color name="textColor">#E7EDFF</color>
+    <color name="background">#191A25</color>
+    <color name="boxStrokeColor">#6C63FF</color>
+    <color name="textColorHint">#656D8A</color>
+
+    <color name="unselectedButton">#E6232636</color>
+    <color name="selectedButton">#FE4E27</color>
+
+    <color name="unselectedText">#656D8A</color>
+    <color name="selectedText">#E7EDFF</color>
+
+    <color name="navControl">#282C3F</color>
+    <color name="navControlItem">#E7EDFF</color>
+
+    <color name="searchViewBackground">#656D8A</color>
+    <color name="searchViewText">#E7EDFF</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="unselected">#2A2E42</color>
+
+
+
+
 </resources>

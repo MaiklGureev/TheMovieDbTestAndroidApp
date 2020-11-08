@@ -11,12 +11,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
+
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMaxTextSize="32sp"
             android:autoSizeTextType="uniform"
             android:gravity="center_vertical"
             android:text="@string/welcome"
@@ -27,7 +38,7 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:layout_weight="2"
-            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMaxTextSize="16sp"
             android:autoSizeTextType="uniform"
             android:gravity="center_vertical"
             android:lines="2"
@@ -40,16 +51,19 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:layout_weight="2"
-
+            app:hintTextColor="@color/textColorHint"
+            android:textColorHint="@color/textColorHint"
+            app:boxStrokeColor = "@color/strokeColor"
             android:hint="@string/login">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_input_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:autoSizeMaxTextSize="15sp"
+                android:autoSizeMaxTextSize="16sp"
                 android:autoSizeTextType="uniform"
                 android:inputType="text"
+                android:textColor="@color/textColor"
                 android:text="MikhailGureev" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -63,15 +77,20 @@
             android:layout_weight="2"
             android:gravity="center_vertical"
             android:hint="@string/password"
+            app:hintTextColor="@color/textColorHint"
+            android:textColorHint="@color/textColorHint"
+            app:boxStrokeColor = "@color/strokeColor"
+            app:endIconTint = "@color/textColorHint"
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_input_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:autoSizeMaxTextSize="15sp"
+                android:autoSizeMaxTextSize="16sp"
                 android:autoSizeTextType="uniform"
                 android:inputType="textPassword"
+                android:textColor="@color/textColor"
                 android:text="0000" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +100,7 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:layout_weight="5"
-            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMaxTextSize="16sp"
             android:autoSizeTextType="uniform"
             android:lines="2"
             android:text="@string/incorrect_login_and_password"
@@ -94,8 +113,10 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:layout_weight="2"
-            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMaxTextSize="16sp"
             android:autoSizeTextType="uniform"
+            app:backgroundTint = "@color/selectedButton"
+            android:textColor="@color/selectedText"
             android:text="@string/enter" />
     </LinearLayout>
 

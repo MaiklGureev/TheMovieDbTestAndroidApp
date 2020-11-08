@@ -1,5 +1,7 @@
 package ru.gureev.MovieDbTestAndroidApp;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,8 +10,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.redmadrobot.pinkman.Pinkman;
+
+import java.util.ArrayList;
 
 import ru.gureev.MovieDbTestAndroidApp.repository.Repository;
+import ru.gureev.MovieDbTestAndroidApp.tools.GlobalAppContextSingleton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,22 +24,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.navigation_movies, R.id.navigation_favorites, R.id.navigation_account)
-//                .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        Repository.getInstance();
+        GlobalAppContextSingleton.getInstance().initialize(this);
+
+        Intent intent = getIntent();
+        boolean resetData = intent.getBooleanExtra(AppConfig.RESET_DATA, false);
+        if (resetData) {
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE);
+            StringBuffer id = new StringBuffer();
+            id.append(sharedPreferences.getString(AppConfig.APP_PREFERENCES_NAME, ""));
+            Repository.getInstance().getAccountData().setSession_id(id.toString());
+
+            Pinkman pinkman = new Pinkman(getApplicationContext(), AppConfig.PIN_STORAGE_NAME, new ArrayList<String>());
+            pinkman.removePin();
+
+            SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE).edit();
+            editor.remove(AppConfig.APP_PREFERENCES_NAME);
+            editor.commit();
+        }else{
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE);
+            Repository.getInstance()
+                    .getAccountData()
+                    .loadAccountData(sharedPreferences.getString(AppConfig.APP_PREFERENCES_NAME, ""));
+        }
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        //Navigation.findNavController(this,R.id.nav_host_fragment).popBackStack();
+    protected void onStart() {
+        super.onStart();
     }
 
 

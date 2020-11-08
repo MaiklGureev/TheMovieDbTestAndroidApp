@@ -33,6 +33,8 @@ public interface FavoritesContract {
         void saveCurrentTypeAdapter(TypeAdapter currentTypeAdapter);
 
         TypeAdapter getCurrentTypeAdapter();
+
+        void reloadMovie();
     }
 
 }

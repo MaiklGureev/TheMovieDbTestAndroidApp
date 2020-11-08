@@ -64,6 +64,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         }
     }
 
+
+    public int getLastVisibleItem() {
+        return lastVisibleItem;
+    }
+
     public void filter(String text) {
         filterQuery = text;
         movies.clear();
