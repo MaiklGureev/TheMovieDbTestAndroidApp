@@ -200,8 +200,10 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
     public void switchAdapter() {
         if (currentTypeAdapter == TypeAdapter.LINER) {
             setAdapter(TypeAdapter.GRID);
+            favoriteTextView.setVisibility(View.VISIBLE);
         } else {
             setAdapter(TypeAdapter.LINER);
+            favoriteTextView.setVisibility(View.VISIBLE);
         }
         favoritesPresenter.saveCurrentTypeAdapter(currentTypeAdapter);
     }

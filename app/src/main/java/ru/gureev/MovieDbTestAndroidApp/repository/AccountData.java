@@ -46,25 +46,6 @@ public class AccountData {
     private AccountResponse account;
 
     private MutableLiveData<Integer> statusCode = new MutableLiveData<>();
-    private MutableLiveData<List<Genre>> genreMutableLiveData = new MutableLiveData<>();
-
-    Callback<NewSessionResponse> newSessionResponseCallback = new Callback<NewSessionResponse>() {
-        @Override
-        public void onResponse(Call<NewSessionResponse> call, Response<NewSessionResponse> response) {
-            if (response.body() != null) {
-                Log.d(TAG, "onResponse: !null" + response.body().toString());
-                request_token = response.body().getRequest_token();
-                loadSessionId(request_token);
-            }
-            statusCode.setValue(response.code());
-        }
-
-        @Override
-        public void onFailure(Call<NewSessionResponse> call, Throwable t) {
-            Log.d(TAG, "onFailure: " + call.toString());
-            statusCode.setValue(AppConfig.CODE_ERROR);
-        }
-    };
     Callback<NewTokenResponse> newTokenResponseCallback = new Callback<NewTokenResponse>() {
         @Override
         public void onResponse(Call<NewTokenResponse> call, Response<NewTokenResponse> response) {
@@ -95,9 +76,42 @@ public class AccountData {
             statusCode.setValue(AppConfig.CODE_ERROR);
         }
     };
+    Callback<SessionIdResponse> sessionIdResponseCallback = new Callback<SessionIdResponse>() {
+        @Override
+        public void onResponse(Call<SessionIdResponse> call, Response<SessionIdResponse> response) {
+            if (response.body() != null) {
+                Log.d(TAG, "onResponse: " + response.code());
+                session_id = (response.body().getSession_id());
+                //loadAccountData(session_id);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<SessionIdResponse> call, Throwable t) {
+            Log.d(TAG, "onFailure: " + call.toString());
+            statusCode.setValue(AppConfig.CODE_ERROR);
+        }
+    };
+    Callback<NewSessionResponse> newSessionResponseCallback = new Callback<NewSessionResponse>() {
+        @Override
+        public void onResponse(Call<NewSessionResponse> call, Response<NewSessionResponse> response) {
+            if (response.body() != null) {
+                Log.d(TAG, "onResponse: !null" + response.body().toString());
+                request_token = response.body().getRequest_token();
+                loadSessionId(request_token);
+            }
+            statusCode.setValue(response.code());
+        }
+
+        @Override
+        public void onFailure(Call<NewSessionResponse> call, Throwable t) {
+            Log.d(TAG, "onFailure: " + call.toString());
+            statusCode.setValue(AppConfig.CODE_ERROR);
+        }
+    };
+    private MutableLiveData<List<Genre>> genreMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<AccountResponse> accountResponseMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Movie>> favoriteMoviesMutableLiveData = new MutableLiveData<>();
-
     Callback<MoviesResponse> moviesResponseCallback = new Callback<MoviesResponse>() {
         @Override
         public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
@@ -109,6 +123,7 @@ public class AccountData {
                 List<Movie> tempList = favoriteMoviesMutableLiveData.getValue() != null ? favoriteMoviesMutableLiveData.getValue() : new ArrayList<Movie>();
                 tempList.addAll(response.body().getResults());
                 favoriteMoviesMutableLiveData.setValue(tempList);
+                setGenresToFilms();
 
                 if (currentPage + 1 <= totalPages) {
                     currentPage++;
@@ -140,22 +155,6 @@ public class AccountData {
             Log.d(TAG, "onFailure: " + call.toString());
             statusCode.setValue(AppConfig.CODE_ERROR);
             logOut();
-        }
-    };
-    Callback<SessionIdResponse> sessionIdResponseCallback = new Callback<SessionIdResponse>() {
-        @Override
-        public void onResponse(Call<SessionIdResponse> call, Response<SessionIdResponse> response) {
-            if (response.body() != null) {
-                Log.d(TAG, "onResponse: " + response.code());
-                session_id = (response.body().getSession_id());
-                //loadAccountData(session_id);
-            }
-        }
-
-        @Override
-        public void onFailure(Call<SessionIdResponse> call, Throwable t) {
-            Log.d(TAG, "onFailure: " + call.toString());
-            statusCode.setValue(AppConfig.CODE_ERROR);
         }
     };
     Callback<AddFavoriteMovieResponse> addFavoriteMovieResponseCallback = new Callback<AddFavoriteMovieResponse>() {
@@ -261,6 +260,11 @@ public class AccountData {
         return session_id;
     }
 
+    public void setSession_id(String session_id) {
+        this.session_id = session_id;
+        loadAccountData(session_id);
+    }
+
     public MutableLiveData<List<Movie>> getFavoriteMoviesMutableLiveData() {
         return favoriteMoviesMutableLiveData;
     }
@@ -277,15 +281,11 @@ public class AccountData {
         return statusCode;
     }
 
-    public void setSession_id(String session_id) {
-        this.session_id = session_id;
-    }
-
     public MutableLiveData<List<Genre>> getGenreMutableLiveData() {
         return genreMutableLiveData;
     }
 
-    void logOut(){
+    void logOut() {
         Context context = GlobalAppContextSingleton.getInstance().getApplicationContext();
         SharedPreferences sharedPreferences = context.getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE);
         String id = sharedPreferences.getString(AppConfig.APP_PREFERENCES_NAME, "");
@@ -299,6 +299,7 @@ public class AccountData {
         editor.commit();
 
     }
+
     private void loadGenres() {
 
         Callback<GenresResponse> genresResponseCallback = new Callback<GenresResponse>() {
@@ -321,5 +322,24 @@ public class AccountData {
                 .enqueue(genresResponseCallback);
     }
 
+    void setGenresToFilms() {
 
+        List<Genre> genreList = genreMutableLiveData.getValue();
+        List<Movie> movieList = favoriteMoviesMutableLiveData.getValue();
+
+        if (genreList != null && movieList != null) {
+
+            for (Movie m : movieList) {
+                m.setGenres(new ArrayList<Genre>());
+                for (int id : m.getGenre_ids()) {
+                    for (Genre gFull : genreList) {
+                        if (id == gFull.getId()) {
+                            m.getGenres().add(new Genre(id, gFull.getName()));
+                        }
+                    }
+                }
+            }
+            favoriteMoviesMutableLiveData.setValue(movieList);
+        }
+    }
 }

@@ -43,6 +43,42 @@ public class CreatePinCodeFragment extends Fragment implements CreatePinCodeCont
     private Toolbar toolbar;
     private MaterialTextView message;
     private MaterialTextView errorMessage;
+    private View.OnClickListener keyClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.button_0:
+                case R.id.button_1:
+                case R.id.button_2:
+                case R.id.button_3:
+                case R.id.button_4:
+                case R.id.button_5:
+                case R.id.button_6:
+                case R.id.button_7:
+                case R.id.button_8:
+                case R.id.button_9: {
+                    mViewModel.addNewNumberToPinCode(((MaterialButton) v).getText().toString());
+                    break;
+                }
+                case R.id.button_delete: {
+                    mViewModel.deleteNumber();
+                    break;
+                }
+
+            }
+
+        }
+    };
+    private View.OnClickListener goBackClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (mViewModel.getPinCodeState() == AppConfig.PinCodeState.SECOND_ATTEMPT) {
+                mViewModel.goToFirstAttempt();
+            } else {
+                Navigation.findNavController(v).popBackStack();
+            }
+        }
+    };
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -163,51 +199,10 @@ public class CreatePinCodeFragment extends Fragment implements CreatePinCodeCont
         }
     }
 
-
-
     void initToolbar(View view) {
         toolbar = view.findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_back_24dp);
         toolbar.setNavigationOnClickListener(goBackClickListener);
     }
-
-
-    private View.OnClickListener keyClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.button_0:
-                case R.id.button_1:
-                case R.id.button_2:
-                case R.id.button_3:
-                case R.id.button_4:
-                case R.id.button_5:
-                case R.id.button_6:
-                case R.id.button_7:
-                case R.id.button_8:
-                case R.id.button_9: {
-                    mViewModel.addNewNumberToPinCode(((MaterialButton) v).getText().toString());
-                    break;
-                }
-                case R.id.button_delete: {
-                    mViewModel.deleteNumber();
-                    break;
-                }
-
-            }
-
-        }
-    };
-
-    private View.OnClickListener goBackClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (mViewModel.getPinCodeState() == AppConfig.PinCodeState.SECOND_ATTEMPT) {
-                mViewModel.goToFirstAttempt();
-            } else {
-                Navigation.findNavController(v).popBackStack();
-            }
-        }
-    };
 
 }

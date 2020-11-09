@@ -8,12 +8,15 @@ public interface AccountContract {
 
     interface View {
         void setAccountInfo(String name, String userName);
+
         ShapeableImageView getImageView();
+
         Context getContext();
     }
 
     interface Presenter {
         void loadAccount();
+
         void exit();
     }
 

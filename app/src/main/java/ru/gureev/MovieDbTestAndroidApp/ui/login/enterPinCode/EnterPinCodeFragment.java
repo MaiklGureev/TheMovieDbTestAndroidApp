@@ -42,6 +42,36 @@ public class EnterPinCodeFragment extends Fragment implements EnterPinCodeContra
     private MaterialTextView userNameTextView;
     private MaterialTextView errorMessageTextView;
     private ShapeableImageView userImageView;
+    private View.OnClickListener keyClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.button_0:
+                case R.id.button_1:
+                case R.id.button_2:
+                case R.id.button_3:
+                case R.id.button_4:
+                case R.id.button_5:
+                case R.id.button_6:
+                case R.id.button_7:
+                case R.id.button_8:
+                case R.id.button_9: {
+                    mViewModel.addNewNumberToPinCode(((MaterialButton) v).getText().toString());
+                    break;
+                }
+                case R.id.button_delete: {
+                    mViewModel.deleteNumber();
+                    break;
+                }
+                case R.id.button_exit: {
+                    mViewModel.exit();
+                    break;
+                }
+
+            }
+
+        }
+    };
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -172,37 +202,5 @@ public class EnterPinCodeFragment extends Fragment implements EnterPinCodeContra
             }
         }
     }
-
-
-    private View.OnClickListener keyClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.button_0:
-                case R.id.button_1:
-                case R.id.button_2:
-                case R.id.button_3:
-                case R.id.button_4:
-                case R.id.button_5:
-                case R.id.button_6:
-                case R.id.button_7:
-                case R.id.button_8:
-                case R.id.button_9: {
-                    mViewModel.addNewNumberToPinCode(((MaterialButton) v).getText().toString());
-                    break;
-                }
-                case R.id.button_delete: {
-                    mViewModel.deleteNumber();
-                    break;
-                }
-                case R.id.button_exit: {
-                    mViewModel.exit();
-                    break;
-                }
-
-            }
-
-        }
-    };
 
 }

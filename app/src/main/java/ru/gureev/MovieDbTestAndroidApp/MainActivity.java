@@ -30,31 +30,30 @@ public class MainActivity extends AppCompatActivity {
 
         GlobalAppContextSingleton.getInstance().initialize(this);
 
-        Intent intent = getIntent();
-        boolean resetData = intent.getBooleanExtra(AppConfig.RESET_DATA, false);
-        if (resetData) {
-            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE);
-            StringBuffer id = new StringBuffer();
-            id.append(sharedPreferences.getString(AppConfig.APP_PREFERENCES_NAME, ""));
-            Repository.getInstance().getAccountData().setSession_id(id.toString());
 
-            Pinkman pinkman = new Pinkman(getApplicationContext(), AppConfig.PIN_STORAGE_NAME, new ArrayList<String>());
-            pinkman.removePin();
-
-            SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE).edit();
-            editor.remove(AppConfig.APP_PREFERENCES_NAME);
-            editor.commit();
-        }else{
-            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE);
-            Repository.getInstance()
-                    .getAccountData()
-                    .loadAccountData(sharedPreferences.getString(AppConfig.APP_PREFERENCES_NAME, ""));
-        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        Intent intent = getIntent();
+        boolean resetData = intent.getBooleanExtra(AppConfig.RESET_DATA, false);
+        if (resetData) {
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE);
+            Repository.getInstance().getAccountData().setSession_id(sharedPreferences.getString(AppConfig.APP_PREFERENCES_NAME, ""));
+
+            Pinkman pinkman = new Pinkman(getApplicationContext(), AppConfig.PIN_STORAGE_NAME, new ArrayList<String>());
+            pinkman.removePin();
+
+//            SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE).edit();
+//            editor.remove(AppConfig.APP_PREFERENCES_NAME);
+//            editor.commit();
+        } else {
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE);
+            Repository.getInstance()
+                    .getAccountData()
+                    .loadAccountData(sharedPreferences.getString(AppConfig.APP_PREFERENCES_NAME, ""));
+        }
     }
 
 

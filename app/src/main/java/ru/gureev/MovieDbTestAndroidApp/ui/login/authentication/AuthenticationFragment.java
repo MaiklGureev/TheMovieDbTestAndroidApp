@@ -73,11 +73,11 @@ public class AuthenticationFragment extends Fragment implements AuthenticationCo
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (loginInputEditText.length() != 0 && passwordInputEditText.length() != 0){
+                if (loginInputEditText.length() != 0 && passwordInputEditText.length() != 0) {
                     Log.d("afterTextChanged", "afterTextChanged: true");
                     exitMaterialButton.setRippleColorResource(R.color.selectedText);
                     exitMaterialButton.setBackgroundResource(R.color.selectedButton);
-                }else {
+                } else {
                     exitMaterialButton.setRippleColorResource(R.color.unselectedText);
                     exitMaterialButton.setBackgroundResource(R.color.unselectedButton);
                     Log.d("afterTextChanged", "afterTextChanged: false");

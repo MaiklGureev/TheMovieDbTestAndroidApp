@@ -97,6 +97,7 @@ public class CreatePinCodeViewModel extends ViewModel implements CreatePinCodeCo
     public void goToFirstAttempt() {
         pinCodeState = AppConfig.PinCodeState.FIRST_ATTEMPT;
         view.setIndicatorsValue(0);
+        view.showErrorMessage(false);
         tempPinCode.delete(0, tempPinCode.length());
         tempPinCodeRepeat.delete(0, tempPinCodeRepeat.length());
         view.updateMessage(R.string.come_up_with_a_pin_code);
