@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.main.show_movie_details.ShowMovieDetailsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeable_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:scaleType="fitXY"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:autoSizeMaxTextSize="16sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center|left"
+                android:lines="1" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/english_title"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@id/title"
+                android:layout_weight="2"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center|left"
+                android:lines="1"
+                android:textColor="@color/unselectedText" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/genres"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="center|left"
+                android:lines="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/time_text_view"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="top"
+                android:text="@string/time"
+                android:textColor="@color/unselectedText"
+                android:visibility="invisible" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/time"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:autoSizeMaxTextSize="16sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="bottom"
+                android:text="" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/rating_text_view"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="top"
+                android:lines="1"
+                android:text="@string/rating"
+                android:textColor="@color/unselectedText"
+                android:visibility="invisible" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/rating"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:autoSizeMaxTextSize="16sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="bottom"
+                android:text="" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/number_of_rating"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/rating"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="bottom"
+                android:text=""
+                android:textColor="@color/unselectedText" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:padding="10dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp" />
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             Pinkman pinkman = new Pinkman(getApplicationContext(), AppConfig.PIN_STORAGE_NAME, new ArrayList<String>());
             pinkman.removePin();
 
+
 //            SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE).edit();
 //            editor.remove(AppConfig.APP_PREFERENCES_NAME);
 //            editor.commit();
