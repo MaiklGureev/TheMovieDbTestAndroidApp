@@ -46,22 +46,6 @@ public class AccountData {
     private AccountResponse account;
 
     private MutableLiveData<Integer> statusCode = new MutableLiveData<>();
-    Callback<NewTokenResponse> newTokenResponseCallback = new Callback<NewTokenResponse>() {
-        @Override
-        public void onResponse(Call<NewTokenResponse> call, Response<NewTokenResponse> response) {
-            if (response.body() != null) {
-                Log.d(TAG, "onResponse: " + response.body().toString());
-                request_token = response.body().getRequest_token();
-                loadSession(login, password, request_token);
-            }
-        }
-
-        @Override
-        public void onFailure(Call<NewTokenResponse> call, Throwable t) {
-            Log.d(TAG, "onFailure: " + call.toString());
-            statusCode.setValue(AppConfig.CODE_ERROR);
-        }
-    };
     Callback<DeleteSessionResponse> deleteSessionResponseCallback = new Callback<DeleteSessionResponse>() {
         @Override
         public void onResponse(Call<DeleteSessionResponse> call, Response<DeleteSessionResponse> response) {
@@ -105,6 +89,22 @@ public class AccountData {
 
         @Override
         public void onFailure(Call<NewSessionResponse> call, Throwable t) {
+            Log.d(TAG, "onFailure: " + call.toString());
+            statusCode.setValue(AppConfig.CODE_ERROR);
+        }
+    };
+    Callback<NewTokenResponse> newTokenResponseCallback = new Callback<NewTokenResponse>() {
+        @Override
+        public void onResponse(Call<NewTokenResponse> call, Response<NewTokenResponse> response) {
+            if (response.body() != null) {
+                Log.d(TAG, "onResponse: " + response.body().toString());
+                request_token = response.body().getRequest_token();
+                loadSession(login, password, request_token);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<NewTokenResponse> call, Throwable t) {
             Log.d(TAG, "onFailure: " + call.toString());
             statusCode.setValue(AppConfig.CODE_ERROR);
         }

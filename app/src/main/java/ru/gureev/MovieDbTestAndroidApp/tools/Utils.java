@@ -12,7 +12,6 @@ import ru.gureev.MovieDbTestAndroidApp.R;
 
 public class Utils {
 
-
     //загрузка фото
     public static void loadPicture(ShapeableImageView imageView, String url) {
         if (url.equals(AppConfig.API_IMAGE_URL + "null")) {

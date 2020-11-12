@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -32,11 +31,9 @@ public class AccountFragment extends Fragment implements AccountContract.View {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        accountPresenter =
-                ViewModelProviders.of(this).get(AccountPresenter.class);
         View root = inflater.inflate(R.layout.fragment_account, container, false);
+        accountPresenter = new AccountPresenter();
         accountPresenter.setView(this);
-
         return root;
     }
 

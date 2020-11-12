@@ -42,8 +42,8 @@
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:lines="1"
-            android:textColor="@color/unselectedText"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/unselectedText" />
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -52,8 +52,8 @@
         android:layout_height="60dp"
         android:autoSizeMaxTextSize="16sp"
         android:autoSizeTextType="uniform"
-        android:textColor="@color/strokeColor"
-        android:backgroundTint= "@color/unselectedButton"
+        android:backgroundTint="@color/unselectedButton"
         android:text="@string/exit"
+        android:textColor="@color/strokeColor"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import ru.gureev.MovieDbTestAndroidApp.POJOs.movie.MoviesResponse;
 import ru.gureev.MovieDbTestAndroidApp.network.NetworkService;
 import ru.gureev.MovieDbTestAndroidApp.tools.TypeAdapter;
 
-public class MoviesPresenter extends ViewModel implements MoviesContract.Presenter {
+public class MoviesPresenter implements MoviesContract.Presenter {
 
     private MoviesContract.View view;
     private MutableLiveData<List<Movie>> movieLiveData = new MutableLiveData<>();

@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
 import com.redmadrobot.pinkman.Pinkman;
 
@@ -17,7 +16,7 @@ import ru.gureev.MovieDbTestAndroidApp.tools.Utils;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class AccountPresenter extends ViewModel implements AccountContract.Presenter {
+public class AccountPresenter implements AccountContract.Presenter {
 
     private AccountContract.View view;
 

@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
 import com.redmadrobot.pinkman.Pinkman;
 
@@ -20,7 +19,7 @@ import ru.gureev.MovieDbTestAndroidApp.tools.Utils;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class EnterPinCodeViewModel extends ViewModel implements EnterPinCodeContract.Presenter {
+public class EnterPinCodeViewModel implements EnterPinCodeContract.Presenter {
 
     private EnterPinCodeContract.View view;
     private StringBuilder tempPinCode = new StringBuilder();
@@ -98,6 +97,7 @@ public class EnterPinCodeViewModel extends ViewModel implements EnterPinCodeCont
             protected Object doInBackground(Object[] objects) {
                 Intent intent = new Intent(view.getContext().getApplicationContext(), MainActivity.class);
                 intent.putExtra(AppConfig.RESET_DATA, true);
+                intent.putExtra(AppConfig.PIN_STORAGE_NAME, tempPinCode.toString());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 view.getContext().getApplicationContext().startActivity(intent);
                 return null;

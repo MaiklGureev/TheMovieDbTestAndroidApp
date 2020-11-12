@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -29,10 +28,6 @@ public class AuthenticationFragment extends Fragment implements AuthenticationCo
     private TextInputEditText passwordInputEditText;
     private MaterialTextView errorMessageTextView;
 
-    public static AuthenticationFragment newInstance() {
-        return new AuthenticationFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -43,7 +38,7 @@ public class AuthenticationFragment extends Fragment implements AuthenticationCo
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(AuthenticationViewModel.class);
+        mViewModel = new AuthenticationViewModel();
         mViewModel.setView(this);
 
         exitMaterialButton = getView().findViewById(R.id.exit_button);

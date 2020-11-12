@@ -14,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,8 +52,9 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: ");
-        favoritesPresenter =
-                ViewModelProviders.of(this).get(FavoritesPresenter.class);
+
+        favoritesPresenter = new FavoritesPresenter();
+        favoritesPresenter.setView(this);
 
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
 
@@ -69,7 +69,6 @@ public class FavoritesFragment extends Fragment implements FavoritesContract.Vie
         recyclerView = view.findViewById(R.id.relative_layout_movies);
         nothingFoundTextView = view.findViewById(R.id.nothing_found_text_view);
         favoriteTextView = view.findViewById(R.id.favorite_text_view);
-        favoritesPresenter.setView(this);
 
         currentTypeAdapter = TypeAdapter.LINER;
         mLayoutManager = new LinearLayoutManager(getContext());

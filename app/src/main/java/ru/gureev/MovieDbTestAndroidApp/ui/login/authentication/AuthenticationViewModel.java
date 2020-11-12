@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
@@ -14,7 +13,7 @@ import ru.gureev.MovieDbTestAndroidApp.AppConfig;
 import ru.gureev.MovieDbTestAndroidApp.R;
 import ru.gureev.MovieDbTestAndroidApp.repository.Repository;
 
-public class AuthenticationViewModel extends ViewModel implements AuthenticationContract.Presenter {
+public class AuthenticationViewModel implements AuthenticationContract.Presenter {
 
     private static final String TAG = "AuthenticationViewModel";
     private AuthenticationContract.View view;

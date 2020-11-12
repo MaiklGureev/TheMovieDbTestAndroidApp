@@ -14,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,8 +52,7 @@ public class MoviesFragment extends Fragment implements MoviesContract.View {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        moviesPresenter =
-                ViewModelProviders.of(this).get(MoviesPresenter.class);
+        moviesPresenter = new MoviesPresenter();
         moviesPresenter.setView(this);
         View root = inflater.inflate(R.layout.fragment_movies, container, false);
         Log.d(TAG, "onCreateView: ");

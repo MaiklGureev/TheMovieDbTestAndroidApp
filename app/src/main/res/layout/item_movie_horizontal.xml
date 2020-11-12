@@ -31,21 +31,20 @@
             android:autoSizeTextType="uniform"
             android:gravity="center|left"
             android:lines="1"
-            android:text="Сопротивление (2020)"
-            />
+            android:text="Сопротивление (2020)" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/english_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_below="@id/title"
-            android:textColor="@color/unselectedText"
             android:layout_weight="2"
             android:autoSizeMaxTextSize="14sp"
             android:autoSizeTextType="uniform"
             android:gravity="center|left"
             android:lines="1"
-            android:text="Resistance (2020)" />
+            android:text="Resistance (2020)"
+            android:textColor="@color/unselectedText" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/genres"
@@ -61,32 +60,30 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
-            >
+            android:layout_weight="3">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/rating"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
                 android:autoSizeMaxTextSize="16sp"
                 android:autoSizeTextType="uniform"
                 android:gravity="bottom"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true"
                 android:text="6.6" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/number_of_rating"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:textColor="@color/unselectedText"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="14sp"
-                android:gravity="bottom"
-                android:layout_toRightOf="@id/rating"
                 android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/rating"
+                android:autoSizeMaxTextSize="14sp"
+                android:autoSizeTextType="uniform"
+                android:gravity="bottom"
                 android:text="120"
-                 />
+                android:textColor="@color/unselectedText" />
 
 
         </RelativeLayout>

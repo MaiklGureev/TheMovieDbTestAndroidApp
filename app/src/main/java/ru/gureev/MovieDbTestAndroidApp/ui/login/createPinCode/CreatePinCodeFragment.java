@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.button.MaterialButton;
@@ -99,7 +98,7 @@ public class CreatePinCodeFragment extends Fragment implements CreatePinCodeCont
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(CreatePinCodeViewModel.class);
+        mViewModel = new CreatePinCodeViewModel();
         mViewModel.setView(this);
         // TODO: Use the ViewModel
     }

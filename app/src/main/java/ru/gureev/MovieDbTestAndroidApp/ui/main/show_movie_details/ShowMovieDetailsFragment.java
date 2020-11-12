@@ -12,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.imageview.ShapeableImageView;
@@ -57,15 +56,11 @@ public class ShowMovieDetailsFragment extends Fragment implements ShowMovieDetai
         }
     };
 
-    public static ShowMovieDetailsFragment newInstance() {
-        return new ShowMovieDetailsFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        showMovieDetailsPresenter =
-                ViewModelProviders.of(this).get(ShowMovieDetailsPresenter.class);
+        showMovieDetailsPresenter = new ShowMovieDetailsPresenter();
         showMovieDetailsPresenter.setView(this);
         movieId = getArguments().getInt("id");
         return inflater.inflate(R.layout.show_movie_details_fragment, container, false);

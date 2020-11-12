@@ -3,6 +3,7 @@ package ru.gureev.MovieDbTestAndroidApp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -37,19 +38,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Intent intent = getIntent();
+        String s = intent.getStringExtra(AppConfig.PIN_STORAGE_NAME);
         boolean resetData = intent.getBooleanExtra(AppConfig.RESET_DATA, false);
-        if (resetData) {
+        Pinkman pinkman = new Pinkman(getApplicationContext(), AppConfig.PIN_STORAGE_NAME, new ArrayList<String>());
+
+        if (s == null || !pinkman.isValidPin(s) || !pinkman.isPinSet()) {
+            Log.d("MainActivity", "onStart: The crook will not pass !!!");
+            System.exit(1);
+        } else if (resetData) {
             SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE);
             Repository.getInstance().getAccountData().setSession_id(sharedPreferences.getString(AppConfig.APP_PREFERENCES_NAME, ""));
-
-            Pinkman pinkman = new Pinkman(getApplicationContext(), AppConfig.PIN_STORAGE_NAME, new ArrayList<String>());
             pinkman.removePin();
-
-
-//            SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE).edit();
-//            editor.remove(AppConfig.APP_PREFERENCES_NAME);
-//            editor.commit();
-        } else {
+        } else if (!resetData) {
             SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(AppConfig.APP_PREFERENCES, MODE_PRIVATE);
             Repository.getInstance()
                     .getAccountData()

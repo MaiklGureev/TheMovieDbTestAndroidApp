@@ -114,9 +114,9 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/rating_text_view"

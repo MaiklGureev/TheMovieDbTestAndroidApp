@@ -3,7 +3,6 @@ package ru.gureev.MovieDbTestAndroidApp.ui.main.show_movie_details;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,7 +12,7 @@ import ru.gureev.MovieDbTestAndroidApp.POJOs.enities.Movie;
 import ru.gureev.MovieDbTestAndroidApp.network.NetworkService;
 import ru.gureev.MovieDbTestAndroidApp.repository.Repository;
 
-public class ShowMovieDetailsPresenter extends ViewModel implements ShowMovieDetailsContract.Presenter {
+public class ShowMovieDetailsPresenter implements ShowMovieDetailsContract.Presenter {
 
     private MutableLiveData<Movie> currentMovieMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<Boolean> isFavoriteMovieMutableLiveData = new MutableLiveData<>();

@@ -3,8 +3,6 @@ package ru.gureev.MovieDbTestAndroidApp.ui.login.createPinCode;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import androidx.lifecycle.ViewModel;
-
 import com.redmadrobot.pinkman.Pinkman;
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import ru.gureev.MovieDbTestAndroidApp.repository.Repository;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class CreatePinCodeViewModel extends ViewModel implements CreatePinCodeContract.Presenter {
+public class CreatePinCodeViewModel implements CreatePinCodeContract.Presenter {
 
     private CreatePinCodeContract.View view;
     private StringBuilder tempPinCode = new StringBuilder();
@@ -123,9 +121,9 @@ public class CreatePinCodeViewModel extends ViewModel implements CreatePinCodeCo
         savePinCodeAndSession();
         Intent intent = new Intent(view.getContext().getApplicationContext(), MainActivity.class);
         intent.putExtra(AppConfig.RESET_DATA, false);
+        intent.putExtra(AppConfig.PIN_STORAGE_NAME, tempPinCodeRepeat.toString());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         view.getContext().getApplicationContext().startActivity(intent);
-
     }
 
 }

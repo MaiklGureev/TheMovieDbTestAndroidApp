@@ -6,7 +6,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
@@ -14,10 +13,9 @@ import ru.gureev.MovieDbTestAndroidApp.POJOs.enities.Movie;
 import ru.gureev.MovieDbTestAndroidApp.repository.Repository;
 import ru.gureev.MovieDbTestAndroidApp.tools.TypeAdapter;
 
-public class FavoritesPresenter extends ViewModel implements FavoritesContract.Presenter {
+public class FavoritesPresenter implements FavoritesContract.Presenter {
 
     private FavoritesContract.View view;
-    //    private MutableLiveData<List<Genre>> genreLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Movie>> movieLiveData = new MediatorLiveData<>();
     private TypeAdapter currentTypeAdapter = TypeAdapter.LINER;
     private String currentQuery = "";
@@ -32,17 +30,10 @@ public class FavoritesPresenter extends ViewModel implements FavoritesContract.P
     @Override
     public void loadMovies() {
         Repository.getInstance().getAccountData().loadAccountData(Repository.getInstance().getAccountData().getSession_id());
-//        Repository.getInstance().getAccountData().getGenreMutableLiveData().observe((LifecycleOwner) view, new Observer<List<Genre>>() {
-//            @Override
-//            public void onChanged(List<Genre> genres) {
-//                genreLiveData.setValue(genres);
-//            }
-//        });
         Repository.getInstance().getAccountData().getFavoriteMoviesMutableLiveData().observe((LifecycleOwner) view, new Observer<List<Movie>>() {
             @Override
             public void onChanged(final List<Movie> movies) {
                 movieLiveData.setValue(movies);
-                //setGenresToFilms();
                 Log.d(TAG, "onChanged: " + movies.toString());
             }
         });
